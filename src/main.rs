@@ -1,10 +1,17 @@
-use tracing::{error, instrument};
+use sentry_tracing::EventFilter;
+use tracing::{error, instrument, Level};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 fn main() {
     tracing_subscriber::registry()
+        .with(tracing_subscriber::EnvFilter::from_default_env())
         .with(tracing_subscriber::fmt::layer())
-        .with(sentry_tracing::layer())
+        .with(
+            sentry_tracing::layer().event_filter(|metadata| match metadata.level() {
+                &Level::DEBUG | &Level::TRACE => EventFilter::Breadcrumb,
+                _ => EventFilter::Event,
+            }),
+        )
         .init();
 
     let _guard = sentry::init(sentry::ClientOptions {
