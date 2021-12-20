@@ -9,12 +9,14 @@ fn main() {
 
     let _guard = sentry::init(sentry::ClientOptions {
         dsn: Some(
-            std::env::var("SENTRY_DSN")
+            dbg!(std::env::var("SENTRY_DSN"))
                 .expect("SENTRY_DSN is missing")
                 .parse()
                 .expect("valid sentry DSN"),
         ),
-        environment: std::env::var("SENTRY_ENVIRONMENT").ok().map(Into::into),
+        environment: dbg!(std::env::var("SENTRY_ENVIRONMENT"))
+            .ok()
+            .map(Into::into),
         ..Default::default()
     });
 
