@@ -22,10 +22,10 @@ fn main() {
         ..Default::default()
     });
 
-    make_an_error("abc");
+    make_an_error("span_field_value");
 }
 
 #[instrument]
-fn make_an_error(arg: &str) {
-    error!("test");
+fn make_an_error(span_field: &str) {
+    error!(event_field = "event_field_value", "test");
 }
