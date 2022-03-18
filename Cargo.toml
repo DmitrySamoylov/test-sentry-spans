@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tracing = "0.1.26"
-tracing-subscriber = { version = "0.3.3", features = ["env-filter"] }
-sentry = { git = "https://github.com/getsentry/sentry-rust", rev = "2a15988" }
-sentry-tracing = { git = "https://github.com/getsentry/sentry-rust", rev = "2a15988" }
+tracing = "0.1.32"
+tracing-subscriber = { version = "0.3.9", features = ["env-filter"] }
+sentry = { git = "https://github.com/getsentry/sentry-rust", rev = "9dcbeebd" }
+sentry-tracing = { git = "https://github.com/getsentry/sentry-rust", rev = "9dcbeebd" }
