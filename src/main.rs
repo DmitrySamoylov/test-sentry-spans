@@ -1,5 +1,4 @@
-use sentry_tracing::EventFilter;
-use tracing::{error, instrument, Level};
+use tracing::{error, instrument};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 fn main() {
@@ -25,6 +24,8 @@ fn main() {
     make_an_error("span_field_value");
 }
 
+// "span_field" doesn't appear at sentry.io
+// "event_field" appears at sentry.io
 #[instrument]
 fn make_an_error(span_field: &str) {
     error!(event_field = "event_field_value", "test");
