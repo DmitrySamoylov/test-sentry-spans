@@ -3,7 +3,7 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 fn main() {
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::from_default_env())
+        // .with(tracing_subscriber::EnvFilter::from_default_env())
         .with(tracing_subscriber::fmt::layer())
         .with(sentry_tracing::layer())
         .init();
@@ -18,6 +18,7 @@ fn main() {
         environment: dbg!(std::env::var("SENTRY_ENVIRONMENT"))
             .ok()
             .map(Into::into),
+        traces_sample_rate: 1.0,
         ..Default::default()
     });
 
